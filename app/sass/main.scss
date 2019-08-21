@@ -1,5 +1,9 @@
 @import 'components/variable';
+@import 'components/mixin';
 
 body {
-    background-color: $black;
+  background-color: $black;
+}
+header {
+  @include flex();
 }
