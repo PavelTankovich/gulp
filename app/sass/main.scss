@@ -1,9 +1,11 @@
 @import 'components/variable';
 @import 'components/mixin';
-@import 'components/magnific-popup';
 
 body {
   background-color: $black;
+}
+footer {
+  background-color: $white;
 }
 header {
   @include flex();

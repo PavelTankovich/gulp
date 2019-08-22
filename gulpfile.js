@@ -5,12 +5,17 @@ const pathScripts = [
     'app/libs/jquery/dist/jquery.min.js',
     'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
 ];
+const pathCSS = [
+    'app/css/main.css',
+    'app/libs/magnific-popup/dist/magnific-popup.css'
+];
 
 const gulp = require('gulp');
 const sass = require('gulp-sass');
 const browserSync = require('browser-sync');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglifyjs');
+const cssnano = require('gulp-cssnano');
 
 // Создание тасков
 
@@ -45,6 +50,17 @@ gulp.task('sass', () => {
 });
 
 /**
+ * таск преобразования объединения и минификации css файлов
+ */
+
+gulp.task('css-libs', () => {
+    return gulp.src(pathCSS)
+            .pipe(concat('libs.min.css'))
+            .pipe(cssnano())
+            .pipe(gulp.dest('app/css'));
+});
+
+/**
  * таск преобразования объединения и минификации js файлов
  */
 gulp.task('scripts', () => {
@@ -60,11 +76,12 @@ gulp.task('scripts', () => {
  */
 gulp.task('watch', () => {
     gulp.watch(pathSass, gulp.parallel('sass'));
-    gulp.wath(pathHTML, gulp.parallel('code'));
+    gulp.watch(pathCSS , gulp.parallel('css-libs'));
+    gulp.watch(pathHTML, gulp.parallel('code'));
     gulp.watch(pathScripts, gulp.parallel('scripts'));
 });
 
 /**
  * таск запуска очереди выполнения тасков
  */
-gulp.task('default', gulp.parallel('browser-sync', 'sass', 'scripts', 'watch'));
+gulp.task('default', gulp.parallel('browser-sync', 'sass', 'css-libs', 'scripts', 'watch'));

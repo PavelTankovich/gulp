@@ -1,6 +1,8 @@
-@import url(/app/libs/magnific-popup/dist/magnific-popup.css);
 body {
   background-color: #000000; }
+
+footer {
+  background-color: #ffffff; }
 
 header {
   display: flex;
