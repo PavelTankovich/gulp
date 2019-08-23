@@ -107,6 +107,20 @@ gulp.task('scripts', () => {
 });
 
 /**
+ * таск очистки папки dist перед выгрузкой в продакшн
+ */
+gulp.task('clean', function () {
+    return del.sync('dist');
+});
+
+/**
+ * таск очистки кэша
+ */
+gulp.task('clear', function () {
+    return cache.clearAll();
+});
+
+/**
  * таск слежки за файлами
  */
 gulp.task('watch', () => {
@@ -115,20 +129,6 @@ gulp.task('watch', () => {
     gulp.watch(pathHTML, gulp.parallel('code'));
     gulp.watch(pathScripts, gulp.parallel('scripts'));
 });
-
-/**
- * таск очистки папки dist перед выгрузкой в продакшн
- */
-gulp.task('clean', function () {
-    return del.sync('dist');
-})
-
-/**
- * таск очистки кэша
- */
-gulp.task('clear', function () {
-    return cache.clearAll();
-})
 
 /**
  * таск запуска очереди выполнения тасков
